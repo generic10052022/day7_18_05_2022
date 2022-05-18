@@ -1,0 +1,1165 @@
+Polymorphism:====> poly means many morphic====> body structure 
+* Method overloading====> Static or compile time polymorphism
+* Method overriding =====> dynamic or runtime polymorphism
+------------------------------------------------------------------------------------------------------------------------------------
+
+public class Number1 {
+    private int num1;
+    private int num2;
+    private int num3;
+    private float f1;
+    private float f2;
+
+    public int add(int num1, int num2, int num3){
+       this.num1=num1;
+       this.num2=num2;
+       this.num3=num3;
+       return this.num1+this.num2+this.num3;
+     }
+
+    public int add(int num1,int num2){
+     this.num1=num1;
+     this.num2=num2;
+     num3=100;
+     return this.num1+this.num2+num3;
+    }
+    
+   /* public void add(int num1, int num2){
+     this.num1=num1;
+     this.num2=num2;
+     System.out.println(this.num1+this.num2);
+    } */
+   /* We will have comilation error for the above two methods as their parameter numbers and types are same but
+    we have changed the return type. But we dont decide method overloading just with the return type of the methods */
+    public float add(float f1, float f2){
+    
+      this.f1=f1;
+      this.f2=f2;
+      return this.f1+this.f2;
+    }
+
+   public float add(int num1, int num2, int num3,float f1, float f2){
+       this.num1=num1;
+       this.num2=num2;
+       this.num3=num3;
+       this.f1=f1;
+       this.f2=f2;
+       return this.num1+this.num2+this.num3+this.f1+this.f2;
+     }
+  }
+    
+ public class NumberMain1 {
+    public static void main(String args[]) {
+      Number1 number=new Number1();
+      System.out.println(number.add(1,2));
+      System.out.println(number.add(2,3,4));
+      System.out.println(number.add(1.2f,2.3f));
+      System.out.println(number.add(1,2,3,2.3f,4.5f));
+     // System.out.println(number.add(1));  Compilation error because we dont have any add method with a single parameter       
+
+   }
+ }
+
+// As the method call is checked during the compilation time, method overloading is called as compile time polymorphism.
+--------------------------------------------------------------------------------------------------------------------------------------
+Method overriding
+
+       public class Parent7 {
+  
+         public void dispParent(){
+             System.out.println("I am the parent class disp Parent method");
+         }
+
+       public void display(){     // overridden
+               System.out.println("I am the display method of the Parent class");
+       }
+   }
+
+   public class Child7 extends Parent7 {
+       public void dispChild(){
+            System.out.println("I am the Child class disp Child method");
+       }
+       public void display(){      // overriding
+             System.out.println("I am the display method of the Child class");
+       }
+    }
+// In the below class display method is present but the Child7b is not having any parent child relationship with the classes
+// mentioned in the example. So we cannot decide that display in the below class is a overridden or overriding method.
+// But in Parent7 we have a display method which is the method overridden and the Child7 is having the display method
+// If we have two methods with 
+   * method name same
+   * return type same
+   * number of parameters same
+   * data type of parameters same
+   * The classes are having parent child relationship
+Then we say that the method in the derived class is overriding the method in the base/parent class. So the derived class method
+is overriding and base class method is overridden.
+
+// which is overriding method
+
+   public class Child7b {
+     public void display(){
+             System.out.println("I am the display method of the Child7b class");
+       }
+
+   }
+
+   public class ParentChildMain7{
+          public static void main(String args[]){
+              Child7 child=new Child7();
+              child.dispParent();
+              child.dispChild();
+              child.display();
+              Parent7 parent=new Parent7();
+              parent.dispParent();
+              parent.display();
+         }
+    }
+Observations:-
+   * displayParent() is specific to the Parent class and displayChild() is specific to Child class.
+   * display() method is present both in Parent class and the Child class.
+
+              
+Output:
+I am the parent class disp Parent method
+I am the Child class disp Child method
+I am the display method of the Child class  // This is because of method overriding.
+I am the parent class disp Parent method
+I am the display method of the Parent class
+
+
+For method overriding :-
+* We should have two classes related with Parent Child relationship.
+-----------------------------------------------------------------------------------------
+ private=====>default====>protected=====>public
+// Private is the most restrictive access and public is the least restrictive access
+// In the Parent class the access specifier is with less restriction whereas in Child class it is with the most restrictive one.
+
+// Cannot reduce the visibility of the inherited method from Parent8
+
+       public class Parent8 {
+  
+      
+
+       public void display(){     // overridden
+               System.out.println("I am the display method of the Parent class");
+       }
+   }
+
+   public class Child8 extends Parent8 {
+      
+       private void display(){      // overriding
+             System.out.println("I am the display method of the Child class");
+       }
+    }
+
+ public class ParentChildMain8{
+          public static void main(String args[]){
+              Child8 child=new Child8();
+           
+         }
+    }
+-------------------------------------------------------------------------
+
+
+   public class Parent9 {
+  
+      
+
+      void display(){     // overridden
+               System.out.println("I am the display method of the Parent class");
+       }
+   }
+
+   public class Child9 extends Parent9 {
+      
+       public void display(){      // overriding
+             System.out.println("I am the display method of the Child class");
+       }
+    }
+
+ public class ParentChildMain9{
+          public static void main(String args[]){
+              Child9 child=new Child9();
+           
+         }
+    }
+
+-------------------------------------------------------------------------
+
+public class Address {
+private String hno;
+private String city;
+private String locality;
+private int code;
+
+
+// Right click on the editor====> Source======> generate constructor with fields
+
+public Address(String hno, String city, String locality, int code) {
+	super();
+	this.hno = hno;
+	this.city = city;
+	this.locality = locality;
+	this.code = code;
+}
+
+
+
+public String getHno() {
+	return hno;
+}
+public void setHno(String hno) {
+	this.hno = hno;
+}
+public String getCity() {
+	return city;
+}
+public void setCity(String city) {
+	this.city = city;
+}
+public String getLocality() {
+	return locality;
+}
+public void setLocality(String locality) {
+	this.locality = locality;
+}
+public int getCode() {
+	return code;
+}
+public void setCode(int code) {
+	this.code = code;
+}
+
+
+}
+
+
+
+
+
+public class Customer {
+	private String customerId;
+	private String customerName;
+	private long contactNumber;
+	private Address address;
+	public Customer(String customerId, String customerName, long contactNumber,
+			Address address) {
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.contactNumber = contactNumber;
+		this.address = address;
+	}
+	public double payBill(double totalPrice) {
+		System.out.println("Final bill for the customer is calculated here");
+		return totalPrice;
+	}
+	// displayCustomerDetails()
+	// updateDetails() overloaded methods
+	// getter and setter methods
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public long getContactNumber() {
+		return contactNumber;
+	}
+	public void setContactNumber(long contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
+}
+
+
+
+public class RegularCustomer extends Customer {
+	private float discountPercentage;
+	public RegularCustomer(String custId, String custName, long mobileNo,
+			Address address) {
+		super(custId, custName, mobileNo, address);
+		this.discountPercentage = 5.0f;
+	}
+	@Override
+	public double payBill(double totalPrice) {
+		double priceAfterDiscount = totalPrice
+				* (1 - (discountPercentage / 100));
+		return priceAfterDiscount;
+	}
+	// getter and setter methods
+}
+
+
+public class Tester {
+	public static void main(String[] args) {
+	/*	// Customer object created
+              /*  Address address=new Address("D089", "St. Louis Street", "Springfield", 62729);
+		Customer customer = new Customer("C101", "Stephen Abram", 7856341287L,address); */
+              Customer customer = new Customer("C101", "Stephen Abram", 7856341287L,
+				new Address("D089", "St. Louis Street", "Springfield", 62729));
+		// payBill() is invoked
+		double amount = customer.payBill(40.0);
+		System.out.println("Final bill amount is $" + (int) (amount * 100)/ 100.0);
+              //Regular Customer object created
+                 RegularCustomer regularCustomer = new RegularCustomer("C101",
+		  "Stephen Abram", 7856341287L, new Address("D089",
+				"St. Louis Street", "Springfield", 62729));
+            // payBill() is invoked
+              amount = regularCustomer.payBill(40.0);
+           System.out.println("Final bill amount is $" + (int) (amount * 100)/ 100.0);*/
+            Customer regularCustomer = new RegularCustomer("C101", "Stephen Abram", 7856341287L, new Address("D089", "St. Louis            Street", "Springfield", 62729));
+            double amount = regularCustomer.payBill(40.0);
+           System.out.println(amount);
+	}
+}
+
+// We are able to see that reference variable is of Parent type Customer and object is of the Child class RegularCustomer
+
+    Customer customer=new RegularCustomer();
+// The above line is an example of conversion/upcasting where we are converting the child class object into Parent class.
+// So we are learning that the reference of Parent class can store the address if newly created child object.
+   double=customer.payBill(40.0);
+ // In the above line payBill of the Child class is called. So we have remember that here it is being due to the dynamic
+// polymorphism which means that method is called whose reference we are storing in the reference variable
+// In the above case though the reference variable is of Parent type but object of Child type.
+// That is the reason when the methods are called we have the overriding and overridden methods, overriding method will be called(The method which is in the child class)   
+
+    Customer customer=new Customer();
+    RegularCustomer rc=new RegularCustomer():
+
+---------------------------------------------------------------------------------------------------------------------
+public class Parent10 {
+
+    public void display(){
+     System.out.println("Parent");
+    
+   }
+  public void displayParent() {
+    System.out.println("I am the display parent method");
+ }
+}
+
+public class Child10 extends Parent10 {
+    public void display(){
+     System.out.println("Child");
+    }
+    public void displayChild(){
+     System.out.println("I am the display child method");
+ }
+}
+public class ParentChildMain10{
+   public static void main(String args[]){
+     Parent10 parent=new Parent10();
+     parent.display();    // Parent
+    Child10 child=new Child10();
+    child.display();  // Child
+    Parent10 parent1=new Child10();
+    parent1.display(); // Child
+    // It checks for display method in the Parent class , if it is found, it is checked in the Derived class because
+   // object is of the Derived class. If it is found in the Derived class , that version of the method is called.
+    parent1.displayChild(); // This line will show compilation error as this method is not present in the Parent class
+// It checks whether the displayChild is present in the parent class or not as the reference variable is of Parent type
+// as the method is not found in the Parent class , the code gives compilation error   
+
+ parent1.displayParent(); // I am the display parent method
+// In the above case first it is checked in the Parent class and when it is found in the parent class, it is checked
+// in the subclass but in the subclass we dont have any method called displayParent so the displayParent of the Parent class is
+// called
+   }
+}
+-----------------------------------------------------------------------------------------------------------------------
+public class Parent11 {
+
+    public static void display(){
+     System.out.println("Parent");
+    
+   }
+ }
+
+public class Child11 extends Parent11 {
+    public static void display(){
+     System.out.println("Child");
+    }
+  
+ }
+
+public class ParentChildMain11{
+   public static void main(String args[]){
+       Parent11 parent=new Child11();
+        parent.display(); // Parent The reason is static methods are not related with object and that is the reason
+      // There is no concept of method overriding as the static methods are related to the class. Here it will check the
+      // Type of the reference variable. Because reference are created during the compilation time
+   }
+}
+
+---------------------------------------------------------------
+
+
+public class DynamicBindingTester {
+	public static void main(String[] args) {
+		Employee employee = new Employee();
+		Manager manager = new Manager();
+		Employee eduEmployee = new Educator();
+		Educator managerEdu = new Manager();
+		
+		displayEmployeeDetails(employee);
+		displayEmployeeDetails(manager);
+		displayEmployeeDetails(eduEmployee);
+		displayEmployeeDetails(managerEdu);
+	}
+	
+	// Employee reference can accept its object and any of the child object 
+	public static void displayEmployeeDetails(Employee employee) {
+		employee.displayDetails();	// displayDetails invoked will be based on the object received
+	}
+}
+
+public class Employee {
+	String name = "James Anthony";
+	
+	public void displayDetails(){
+		System.out.println(name+" is an employee");
+	}	
+}
+public class Educator extends Employee {
+	public void displayDetails(){
+		System.out.println(name+" is an educator");
+	}
+}
+public class Manager extends Educator {
+	public void displayDetails(){
+		System.out.println(name+" is a manager");
+	}
+}
+------------------------------------------------------------------
+
+public class DynamicBindingTester1 {
+	public static void main(String[] args) {
+		Employee1 employee = new Employee1();
+		Manager1 manager = new Manager1();
+		Employee1 eduEmployee = new Educator1();
+		Educator1 managerEdu = new Manager1();
+		
+		displayEmployeeDetails(employee);   // This wont work
+		displayEmployeeDetails(manager);     // This will work
+		displayEmployeeDetails(eduEmployee);    // This wont work
+		displayEmployeeDetails(managerEdu);     // This will work
+	}
+	
+	// Employee reference can accept its object and any of the child object 
+	public static void displayEmployeeDetails(Educator employee) {
+		employee.displayDetails();	// displayDetails invoked will be based on the object received
+	}
+}
+
+public class Employee1 {
+	String name = "James Anthony";
+	
+	public void displayDetails(){
+		System.out.println(name+" is an employee");
+	}	
+}
+public class Educator1 extends Employee1 {
+	public void displayDetails(){
+		System.out.println(name+" is an educator");
+	}
+}
+public class Manager1 extends Educator1 {
+	public void displayDetails(){
+		System.out.println(name+" is a manager");
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------
+usage of super
+
+public class Parent12 {
+
+    public void display(){
+     System.out.println("Parent");
+    
+   }
+ }
+// super.display() can be invoked anywhere within the display method, it is not required that it should be the first
+// line to be called in the method. When we are using it in constructor calling, that should be the first line in another class
+// constructor
+public class Child12 extends Parent12 {
+    public  void display(){
+     super.display();
+     System.out.println("Child");
+    }
+  
+ }
+
+public class ParentChildMain12{
+   public static void main(String args[]){
+    Child12 child=new Child12();    
+    child.display();   // Parent Child
+   }
+}
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+public class Parent13 {
+   protected int num;
+    public Parent13(){
+      num=10;
+    }
+    public void display(){
+     System.out.println("Parent"+num);
+    
+   }
+ }
+
+public class Child13 extends Parent13 {
+    private int num;
+     public Child13(){
+        num=20;
+     }
+    public  void display(){
+          System.out.println(super.num);
+          System.out.println(num);
+    }
+  
+ }
+
+public class ParentChildMain13{
+   public static void main(String args[]){
+    Child13 child=new Child13();    
+    child.display();   
+   }
+}
+
+
+----------------------------------------
+
+public class Employee{
+
+ public void display(){
+  System.out.println("Employee");
+ }
+
+}
+
+public class Educator extends Employee{
+ public void display(){
+   super.display(); // This will invoke the Employee class display method
+   System.out.println("Educator");
+ }
+
+}
+
+
+public class Manager extends Educator {
+ public void display(){
+  super.super.display(); // This will show compilation error
+  System.out.println("Manager");
+  super.display();  // immediate parent class display will be called which is an Educator 
+  
+ }
+
+}
+
+public class Main{
+   public static void main(String args[]) {
+    Manager manager=new Manager();
+    manager.display();   Manager Employee Educator
+  }
+ }
+-------------------------------------------------------------------------------------------------------------------------------
+Object is at the topmost level in the class Hierarchy.
+
+  public class Project {}
+  public class Student {}
+  public class Employee{}
+
+  public class Project extends Object {}
+  public class Student extends Object {}
+  public class Employee extends Object {}
+ 
+// We need not require to write the class being extended from the Object class. It is by default.  
+
+// Q As we dont have the concept of multiple inheritance , in that class if a class is inheriting from other class , then how
+it will inherit the  Object class.
+
+  class Student {}
+
+  class CollegeStudent extends Student {}
+
+// Basically the Student is extending the Object class and CollegeStudent is extending Student. So CollegeStudent is inheriting
+ Object class through Student class
+
+     Object
+      |
+      |
+      |
+    Student
+      |
+      | 
+      |
+   CollegeStudent
+---------------------------------------------------------------------------------------------------------------------
+
+equals method ====> Equals method is 
+
+
+
+class Food {
+
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public String getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	public String getFoodType() {
+		return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+class Tester1 {
+
+	public static void main(String[] args) {
+		Food foodOne = new Food();
+		foodOne.setFoodName("Sandwich");
+		foodOne.setCuisine("Continental");
+		foodOne.setFoodType("Veg");
+		foodOne.setQuantityAvailable(100);
+		foodOne.setUnitPrice(10);
+
+		Food foodTwo = new Food();
+		foodTwo.setFoodName("Sandwich");
+		foodTwo.setCuisine("Continental");
+		foodTwo.setFoodType("Veg");
+		foodTwo.setQuantityAvailable(200);
+		foodTwo.setUnitPrice(10);
+
+		if (foodOne == foodTwo) {
+			System.out.println("The food objects are same!");
+		} else {
+			System.out.println("The food objects are different!");
+		}
+	}
+}
+// == is comparing whether both the reference variables , foodOne and foodTwo are refering to the same object or not. 
+// Here the objects are different. So it is returning false.
+
+The == operator which is used to compare two Food objects compares the objects with respect to their memory address.
+Thus, even though they have the same values of member variables, they are two different objects pointing to two different memory locations.
+-----------------------------------------------------------------------------------------------------------
+Whenever two objects are to be compared based on the values of the member variables, equals() method of Object class can be overridden.
+
+equals() compares objects to check for equality
+
+By default, equals() uses memory address to compare objects for equality (just like ==)
+
+
+
+public class Food2 {
+
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public String getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	public String getFoodType() {
+		return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+public class Tester2 {
+
+	public static void main(String[] args) {
+		Food2 foodOne = new Food2();
+		foodOne.setFoodName("Sandwich");
+		foodOne.setCuisine("Continental");
+		foodOne.setFoodType("Veg");
+		foodOne.setQuantityAvailable(100);
+		foodOne.setUnitPrice(10);
+
+		Food2 foodTwo = new Food2();
+		foodTwo.setFoodName("Sandwich");
+		foodTwo.setCuisine("Continental");
+		foodTwo.setFoodType("Veg");
+		foodTwo.setQuantityAvailable(200);
+		foodTwo.setUnitPrice(10);
+         
+		if (foodOne.equals(foodTwo)) {
+			System.out.println("The food objects are same!");
+		} else {
+			System.out.println("The food objects are different!");
+		}
+               System.out.println(foodOne.hashCode());
+               System.out.println(foodTwo.hashCode());
+	}
+}
+// In the above code though we expected that after using equals method we will get true as the contents of the Food items
+are same but still we are getting false. What is the reason?
+A The reason is , The equals method is inherited from the Object class. We are not writing any equals method in the above
+code. equals method of the Object class compares the address just like == . That is reason again we are getting false.
+
+Q What can we do so that equals method returns true if the contents are same?
+A Override the equals method in our class Food.
+
+Q What is hashCode() method is returning?
+A hashCode() method returns a number which represents the memory address of the newly created object. So for every
+newly created objects we will have different hashCode values returned by the hashCode method.
+
+Q Do we have any relationship between hashCode() method and equals() method?
+A Yes. If two objects after comparision returns true , then they should have the same hashCode value. But the default
+  hashCode method ( which is inherited from the Object class) returns different values though the objects are having the 
+  same content. If two objects are having same hashCode value we can assure that objects will be same.
+
+Q What we need to do so that equals and hashCode works in accordance to the specification in Java?
+A Override both hashCode() and equals() method in the class.
+
+public class Food3 {
+
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+     
+	@Override
+	public int hashCode() {
+		return Objects.hash(cuisine, foodName, foodType, quantityAvailable, unitPrice);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Food3 other = (Food3) obj;
+		return Objects.equals(cuisine, other.cuisine) && Objects.equals(foodName, other.foodName)
+				&& Objects.equals(foodType, other.foodType) && quantityAvailable == other.quantityAvailable
+				&& Double.doubleToLongBits(unitPrice) == Double.doubleToLongBits(other.unitPrice);
+	}
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public String getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	public String getFoodType() {
+		return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+
+public class Tester3 {
+
+	public static void main(String[] args) {
+		Food3 foodOne = new Food3();
+		foodOne.setFoodName("Sandwich");
+		foodOne.setCuisine("Continental");
+		foodOne.setFoodType("Veg");
+		foodOne.setQuantityAvailable(100);
+		foodOne.setUnitPrice(10);
+
+		Food3 foodTwo = new Food3();
+		foodTwo.setFoodName("Sandwich");
+		foodTwo.setCuisine("Continental");
+		foodTwo.setFoodType("Veg");
+		foodTwo.setQuantityAvailable(100);
+		foodTwo.setUnitPrice(10);
+         
+		if (foodOne.equals(foodTwo)) {
+			System.out.println("The food objects are same!");
+		} else {
+			System.out.println("The food objects are different!");
+		}
+               System.out.println(foodOne.hashCode());
+               System.out.println(foodTwo.hashCode());
+	}
+}
+-------------------
+
+  public class StringDemo {
+    public static void main(String args[]) {
+     String str1=new String("hello");
+     String str2=new String("hello");
+     System.out.println(str1==str2);   // false
+     System.out.println(str1.equals(str2)); // true
+     System.out.println(str1.hashCode());
+     System.out.println(str2.hashCode());
+    }
+ }
+---------------------
+String toString()
+
+ 
+  public class Employee1 {
+    private int id;
+    private String name;
+    private String dept;
+    private int basic;
+    //setters/getters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public int getBasic() {
+		return basic;
+	}
+	public void setBasic(int basic) {
+		this.basic = basic;
+	}
+
+
+  }
+
+  
+
+  public class EmployeeMain1 {
+   public static void main(String args[]){
+    Employee1 emp=new Employee1();
+    emp.setId(1);
+    emp.setName("Ritesh");
+    emp.setDept("Sales");
+    emp.setBasic(45000);
+    System.out.println(emp.getId());
+    System.out.println(emp);               //Employee1@1c4af82c  // classname@hashCode value in hexadecimal
+    System.out.println(emp.toString());   //Employee1@1c4af82c
+   }
+ }
+ 
+ // The above data is not very much readable .. So to make it readable we can override the toString method from the Object class.  
+
+
+
+
+ public class Employee2 {
+    private int id;
+    private String name;
+    private String dept;
+    private int basic;
+    //setters/getters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public int getBasic() {
+		return basic;
+	}
+	public void setBasic(int basic) {
+		this.basic = basic;
+	}
+	@Override
+	public String toString() {
+		return "ID"+id+"\n NAME "+name+"\n DEPT "+dept+"\n BASIC"+basic;
+	}
+
+
+  }
+
+  
+public class EmployeeMain2 {
+   public static void main(String args[]){
+    Employee2 emp=new Employee2();
+    emp.setId(1);
+    emp.setName("Ritesh");
+    emp.setDept("Sales");
+    emp.setBasic(45000);
+    System.out.println(emp.getId());
+    //System.out.println(emp);
+    System.out.println(emp.toString());
+   }
+ }
+--------------------------------------------------------------------------------------------------------------------------------
+8 primitive types       Classes mapped with 8 primitive types
+char                    Character
+byte                    Byte
+short                   Short
+int                     Integer
+long                    Long
+float                   Float
+double                  Double
+boolean                 Boolean
+
+The classes are Wrapper classes. They are called as Wrapper classes because they are wrapping the primitive type and
+converting them into objects. Primitive types are not objects but in Java , in many places we require object rather than primitive
+types. In those cases we have to convert the primitive type to Object with the help Wrapper classes. So we have 8 Wrapper classes.
+
+String is not a Wrapper class.
+-------------------------------------------------------------------------------------------------------------------------
+final is a keyword used with 
+* class
+* variables
+* method
+
+If a class is final it cannot be inherited or it cannot be subclassed.
+
+ public final class FinalClass{
+
+
+} 
+
+public class DerivedClass extends FinalClass{}
+
+
+// The type DerivedClass cannot subclass the final class FinalClass
+--------------------------------------------------------------------------------------------------------------------------
+If a variable is final it cannot be re-initialised. 
+* We have two techniques to initialise final variables.
+  ** at the place of declaration
+  ** within the constructor
+
+public class Demo {
+   private final int num=10;
+   
+   public void display(){
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain{
+   public static void main(String args[]) {
+    Demo demo=new Demo();
+    demo.display();
+   }
+ }
+ 
+-----
+// Within constructor 
+public class Demo1 {
+ 
+  private final int num;
+
+   public Demo1(){
+    num=20;
+   }
+   
+   public void display(){
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain1{
+   public static void main(String args[]) {
+    Demo1 demo=new Demo1();
+    demo.display();
+   }
+ }
+
+------------------------------------------------
+// We cannot write as below
+// final variables need to be initialised either at the place of declaration
+// or with the constructor
+public class Demo2 {
+ 
+  private final int num;
+// The blank final field num may not have been initialized
+   
+   public void display(){
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain2{
+   public static void main(String args[]) {
+    Demo2 demo=new Demo2();
+    demo.display();
+   }
+ }
+----------------------------------
+// We cannot reinitialise the final variables. The below code gives compilation error
+
+public class Demo3 {
+ 
+  private final int num;
+
+   public Demo3(){
+    num=20;
+   }
+   
+   public void display(){
+    num=45;  // The final field Demo3.num cannot be assigned
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain3{
+   public static void main(String args[]) {
+    Demo3 demo=new Demo3();
+    demo.display();
+   }
+ }
+
+--------------------------------------
+
+// final method cannot be overridden
+
+public class Demo4 {
+   public final void display(){
+   System.out.println("Hello");
+  }
+}
+
+public class DemoDerive4 extends Demo4 {
+   public void display(){   // Cannot override the final method from  Demo4
+   System.out.println("Hello");
+  }
+ }
+------------------------------------------------------------------
+// A local variable can be declared as final
+public class FinalDemo {
+   public static void main(String args[]) {
+    final int i=10;
+    System.out.println(i);
+    //i=20;
+   }
+ }
+--------------------------------------------------------------------------------------------------------------------
+String class is a final class.
+Wrapper classes are final. 
+ 
