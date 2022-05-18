@@ -1,3 +1,32 @@
+
+// Method chaining 
+ 
+public class Demo {
+   public static void main(String args[]) {
+     Sting str="welcome";
+     String str2=str.toUpperCase().substring(0,1);
+     System.out.println(str2);
+    //  String str2=str.toUpperCase();
+    //  String str3=str2.substring(0,1);
+    
+   }
+}
+
+Constructor chaining
+
+    Item(){
+     this(1,"Book",400);
+     }
+
+   Item(int id, String title, int price){
+    this.id=id;
+    this.title=title;
+    this.price=price;
+    }
+ }
+
+
+
 Polymorphism:====> poly means many morphic====> body structure 
 * Method overloading====> Static or compile time polymorphism
 * Method overriding =====> dynamic or runtime polymorphism
@@ -62,6 +91,11 @@ public class Number1 {
 
 // As the method call is checked during the compilation time, method overloading is called as compile time polymorphism.
 --------------------------------------------------------------------------------------------------------------------------------------
+For method overriding we should have a parent and a child class. Method overriding is not possible in a
+single class because if we keep two methods with the same signature in the same class, it will show
+compilation error due to duplicate methods. 
+The method in the parent class is overridden method and the method in the child class is overriding method.
+
 Method overriding
 
        public class Parent7 {
@@ -83,6 +117,9 @@ Method overriding
              System.out.println("I am the display method of the Child class");
        }
     }
+
+
+
 // In the below class display method is present but the Child7b is not having any parent child relationship with the classes
 // mentioned in the example. So we cannot decide that display in the below class is a overridden or overriding method.
 // But in Parent7 we have a display method which is the method overridden and the Child7 is having the display method
@@ -115,8 +152,17 @@ is overriding and base class method is overridden.
               parent.display();
          }
     }
+
+/*
+I am the parent class disp Parent method
+I am the Child class disp Child method
+I am the display method of the Child class
+I am the parent class disp Parent method
+I am the display method of the Parent class
+*/
+
 Observations:-
-   * displayParent() is specific to the Parent class and displayChild() is specific to Child class.
+   * displayParent() is specific to the Parent class and displayChild() is a specific to Child class.
    * display() method is present both in Parent class and the Child class.
 
               
@@ -152,6 +198,8 @@ For method overriding :-
              System.out.println("I am the display method of the Child class");
        }
     }
+ In the above code we get a compilation error as below
+[ Cannot reduce the visibility of the inherited method from Parent8 ]
 
  public class ParentChildMain8{
           public static void main(String args[]){
@@ -178,14 +226,47 @@ For method overriding :-
        }
     }
 
- public class ParentChildMain9{
+public class ParentChildMain9{
           public static void main(String args[]){
               Child9 child=new Child9();
-           
+              Parent9 parent=child;
+              parent.display(); // display method of the child because object of child type
          }
     }
-
+In the above case as object creation is done during the runtime so which method will be called ( parent class display or child class display) is decided during the runtime and that is the reason method overriding is
+called as runtime polymorphism. 
 -------------------------------------------------------------------------
+Parent class reference variable can be used to store the address of the child class Object. Conversion/upcasting
+
+public class Parent{
+
+}
+
+public class Child extends Parent{
+
+}
+
+public class Main{
+   public static void main(String args[]){
+     Parent parent=new Child(); // after creating the object of child we are storing the reference
+     in the parent class reference variable
+     Child child=new Child();  // We created the child object and stored the reference in the 
+     reference variable of Child type.
+     parent=child; // The child type reference is passing the address of the Child type object
+     // to the parent type reference variable.
+   }
+} 
+------------------------------------------------------------------------------------------------
+public class Person {}
+public class Employee extends Person {}
+public class Student extends Person {}
+Employee is a person but Person is not an employee. Similarly Student is a person but Person is not
+Student.
+
+Person person1=new Employee();
+Person person2=new Student();
+
+------------------------------------------------------------------------------------------------------
 
 public class Address {
 private String hno;
