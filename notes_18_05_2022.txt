@@ -1412,6 +1412,38 @@ public class FinalDemo {
 String class is a final class.
 Wrapper classes are final. 
 -----------------------------------------------------------------------------------------------------------
+abstract  public class Customer{
+  abstract public double payBill(double amount);
+
+  
+ }
+
+public class Guest extends Customer {
+
+  double paybill(int amount){
+    double finalAmount=amount+amount*0.02;
+    return finalAmount;
+   }
+
+}
+
+public class RegularCustomer extends Customer {
+ 
+ double finalAmount=amount-amount*0.20;
+ return finalAmount;
+
+}
+
+public class CustomerMain {
+   public static void main(String args[]) {
+     Customer cust=new Guest();
+    // base class reference holding the address of derived class object.
+    double finalAmount=cust.payBill(2000); // We wont be able to call pay bill
+    // if we dont have paybill in the customer class
+
+   }
+}
+-------------------------------------------------------------------------------------
 Abstract classes are the Parent class with atleast one abstract method.
 Abstract method is a method without a body.
 Abstract class can have concrete methods also. Concrete methods means , methods with body.
