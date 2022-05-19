@@ -1795,7 +1795,7 @@ public abstract class Base2{
  }
 // Thus, abstract classes enforce inheritance (since they can’t be instantiated)
 
----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 
   public class Person {
 
@@ -1820,17 +1820,22 @@ public abstract class Base2{
            System.out.println("Yes person is refering to an object of Person class");
       }
      Person person1=new Employee();
-     System.out.println(person1 instanceof  Person);
-     System.out.println(person1 instanceof Employee);
-     System.out.println(person1 instanceof Object);
-     System.out.println(person1 instanceof RegularEmployee);
+     System.out.println(person1 instanceof  Person);   //true
+     System.out.println(person1 instanceof Employee);  // true
+     System.out.println(person1 instanceof Object);    //true
+     System.out.println(person1 instanceof RegularEmployee); //false
+     person1=new RegularEmployee();
+     System.out.println(person1 instanceof Person); // true
+     System.out.println(person1 instanceof Employee); // true
+     System.out.println(person1 instanceof Object); // true
+     System.out.println(person1 instanceof RegularEmployee); // true
      }
  }
 
 
---------------------------
+--------------------------------------------------------------------------------------------------------------
 
-public class Vechile {}
+public class Bus extends Vehicle{}
 public class Bus extends Vehicle{}
 public class Car extends Vehicle {}
 
@@ -1842,7 +1847,7 @@ public class VehicleMain {
 }
 // Exception in thread "main" java.lang.ClassCastException: class Bus cannot be cast to class Car (Bus and Car are in unnamed module of loader 'app')	at VehicleMain.main(VehicleMain.java:4)
 
-public class VehicleMain {
+public class VehicleMain2 {
    public static void main(String args[]){
      Vehicle vehicle=new Bus();
      //Car car1=(Car)vehicle;
@@ -1858,4 +1863,4 @@ public class VehicleMain {
       }
   }
 }
------- 
+----------------------------------------------------------------------------------------------------------- 
